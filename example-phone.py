@@ -10,14 +10,20 @@ DATADIR = "pocketsphinx/test/data"
 # Create a decoder with certain model
 config = Decoder.default_config()
 config.set_string('-hmm', path.join(MODELDIR, 'en-us/en-us'))
-config.set_string('-lm', path.join(MODELDIR, 'en-us/en-us.lm.bin'))
-config.set_string('-dict', path.join(MODELDIR, 'en-us/cmudict-en-us.dict'))
+#config.set_string('-lm', path.join(MODELDIR, 'en-us/en-us.lm.bin'))
+#config.set_string('-dict', path.join(MODELDIR, 'en-us/cmudict-en-us.dict'))
+config.set_string('-allphone', path.join(MODELDIR, 'en-us/en-us-phone.lm.bin'))
+#config.set_string('-backtrace', 'yes')
+#config.set_string('-beam', 1e-20)
+#config.set_string('-pbeam', 1e-20)
+#config.set_string('-lw', '2.0')
+
 decoder = Decoder(config)
 
 # Decode streaming data.
 decoder = Decoder(config)
 decoder.start_utt()
-stream = open(path.join(DATADIR, 'something.raw'), 'rb')
+stream = open(path.join(DATADIR, 'farai-mono.wav'), 'r')
 while True:
   buf = stream.read(1024)
   if buf:
